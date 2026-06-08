@@ -1,0 +1,48 @@
+# This file is used to configure the LM Studio translator
+
+# url is the URL of the LM Studio OpenAI-compatible server
+url: http://127.0.0.1:1234/v1/chat/completions
+#url: http://192.168.50.200:1234/v1/chat/completions
+
+# apiKey is optional for LM Studio. Leave blank for local servers,
+# or set LMSTUDIO_API_KEY in environment if your server requires one.
+apiKey:
+
+engineMapping:
+  qwen3-4b: # engineCode
+    name: Qwen 3 4B # engineName
+    model: qwen3-4b # modelCode (must match the model identifier loaded in LM Studio)
+  gemma-3-4b-it: # engineCode
+    name: Gemma 3 4B IT # engineName
+    model: gemma-3-4b-it # modelCode
+  llama-3.2-3b-instruct:
+    name: Llama 3.2 3B Instruct
+    model: llama-3.2-3b-instruct
+
+# you can add more engines here
+
+concurrent: 3  # Number of concurrent requests
+
+# Whether to enable thinking/reasoning mode for models that support it.
+# LM Studio has no universal "think" flag. When false, the request sends
+# chat_template_kwargs.enable_thinking=false, which works for Qwen3 / Qwen3.5.
+# Models that don't recognize this kwarg simply ignore it.
+enableThinking: false
+
+# Whether to pass surrounding input items as context during translation.
+# When enabled, previous and next items in the same batch are included as context
+# to help the LLM maintain translation consistency.
+enableContext: true
+systemPrompts: |
+  You are a professional translator to {{targetLang}}.
+  Source text is from OCR and may have minor errors—infer the intended meaning.
+  Produce only the {{targetLang}} translation, no explanations or commentary.
+  Keep abbreviations, codes, and identifiers as-is.
+  Maintain original formatting (e.g., line breaks, punctuation).
+
+userPrompts: |
+  Vocabulary (case-{{glossarySensitive}}):
+  {{glossaryList}}
+
+  Translate to {{targetLang}}:
+  {{original}}

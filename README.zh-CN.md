@@ -4,7 +4,7 @@
 
 与 [Gaminik](https://www.gaminik.cn/) `私有翻译引擎` 特性配合使用的代理翻译软件:
 - 基于 `Kolin` 开发, 支持多操作系统运行.
-- 支持调用私有化部署的大语言模型, 如: `通义千问-Turbo`, `Gemma 3` 等 (通过调用 `Ollama`).
+- 支持调用私有化部署的大语言模型, 如: `通义千问-Turbo`, `Gemma 3` 等 (通过调用 `Ollama` 或 `LM Studio`).
 - 支持调用所有主流翻译引擎 (需要自行申请并配置 `apiKey`).
 - 支持免费调用 `Google`, `Microsoft`, `Yandex`, `Tencent` 等翻译引擎 (`实验性`).
 - 使用大语言模型进行翻译时可以自定义提示词.
@@ -47,12 +47,14 @@ A("`Gaminik
 W("`Gaminik
 <small>Windows</small>`") -->|私有翻译引擎| G
 G -->|翻译器| A1[Ollama]
+G --> A1b[LM Studio]
 G --> A2[OpenAI]
 G --> A4[Microsoft]
 G --> AN@{ shape: processes, label: "Other Translators" }
 A1 -->|翻译引擎| D1[Qwen 2.5 1.5B]
 A1 --> D2[Gemma 3 1B]
 A1 --> DN@{ shape: processes, label: "其它翻译引擎" }
+A1b --> DN
 A2 --> E1[Gpt 4 mini]
 A2 --> EN@{ shape: processes, label: "其它翻译引擎" }
 A4 --> G1[Microsoft]
@@ -75,6 +77,7 @@ AN --> HN[其它翻译引擎]
 | 翻译器  | 翻译引擎  | 需要 API Key ? | 备注                                                                     |
 |---|---|---|------------------------------------------------------------------------|
 | [Ollama](./docs/translators/Ollama.zh-CN.md) |Gemma, Qwen ...| x  | 需要先私有化部署大语言模型, [Ollama 介绍](https://ollama.org.cn/)                     |
+| [LMStudio](./docs/translators/LMStudio.zh-CN.md) |Qwen, Gemma, Llama ...| x  | 需要先私有化部署大语言模型, [LM Studio 介绍](https://lmstudio.ai/) (OpenAI 兼容接口)        |
 | [DeepLX](./docs/translators/DeepLX.zh-CN.md)  |DeepL| x  | 需要自行下载并运行 [DeepLX](https://deeplx.owo.network/)                        |
 | [UnTsDeepLX](./docs/translators/UnTsDeepLX.zh-CN.md) |UnTsDeepLX| × | 参考: [https://github.com/un-ts/deeplx](https://github.com/un-ts/deeplx) |
 | [Google](./docs/translators/ApiKeyTranslators.zh-CN.md)  |Google| ✓  |                                                                        |

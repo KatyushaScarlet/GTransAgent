@@ -4,7 +4,7 @@ English | [简体中文](./README.zh-CN.md)
 
 A proxy translation tool designed to work with the `private translation engine` feature of [Gaminik](https://www.gaminik.net/):
 - Developed with `Kotlin`, supports multi-OS operation.
-- Supports invoking privately deployed LLMs like `Qwen-Turbo`, `Gemma 3` ... (via `Ollama`).
+- Supports invoking privately deployed LLMs like `Qwen-Turbo`, `Gemma 3` ... (via `Ollama` or `LM Studio`).
 - Supports all mainstream translation engines (requires self-applied `apiKey`).
 - Experimental free access to `Google`, `Microsoft`, `Yandex`, `Tencent` translation engines.
 - Customizable prompts when using LLMs for translation.
@@ -45,12 +45,14 @@ A("`Gaminik
 W("`Gaminik
 <small>Windows</small>`") -->|Private Engine| G
 G -->|Translator| A1[Ollama]
+G --> A1b[LM Studio]
 G --> A2[OpenAI]
 G --> A4[Microsoft]
 G --> AN@{ shape: processes, label: "Other Translators" }
 A1 -->|Engine| D1[Qwen 2.5 1.5B]
 A1 --> D2[Gemma 3 1B]
 A1 --> DN@{ shape: processes, label: "Other Engines" }
+A1b --> DN
 A2 --> E1[GPT-4 Mini]
 A2 --> EN@{ shape: processes, label: "Other Engines" }
 A4 --> G1[Microsoft]
@@ -71,6 +73,7 @@ Configure enabled **translators** before starting `GTransAgent`.
 | Translator | Engines | API Key Required | Notes                                                                     |
 |---|---|---|---------------------------------------------------------------------------|
 | [Ollama](./docs/translators/Ollama.md) |Gemma, Qwen...| × | Requires local LLM deployment via [Ollama](https://ollama.org.cn/)        |
+| [LMStudio](./docs/translators/LMStudio.md) |Qwen, Gemma, Llama...| × | Requires local LLM deployment via [LM Studio](https://lmstudio.ai/) (OpenAI-compatible) |
 | [DeepLX](./docs/translators/DeepLX.md) |DeepL| × | Requires [DeepLX](https://deeplx.owo.network/)                            |
 | [UnTsDeepLX](./docs/translators/UnTsDeepLX.md) |UnTsDeepLX| × | Refer: [https://github.com/un-ts/deeplx](https://github.com/un-ts/deeplx) |
 | [Google](./docs/translators/ApiKeyTranslators.md) |Google| ✓ |                                                                           |
