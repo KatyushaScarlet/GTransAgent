@@ -263,9 +263,7 @@ class DeepSeekTranslator : LanguageGroupedTranslator() {
             jsonMap["model"] = engineAndModelMap[engineCode]!!
 
             val thinkEnabled = enableThinking ?: false
-            jsonMap["extra_body"] = mapOf(
-                Pair("thinking", mapOf(Pair("type", if (thinkEnabled) "enabled" else "disabled")))
-            )
+            jsonMap["thinking"] = mapOf(Pair("type", if (thinkEnabled) "enabled" else "disabled"))
             if (thinkEnabled && reasoningEffort != null) {
                 jsonMap["reasoning_effort"] = reasoningEffort!!
             }
